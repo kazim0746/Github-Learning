@@ -1,0 +1,95 @@
+<form id="SignUp">
+    <input type="text" name="email" />
+    <br/>
+    <input type="text" name="password" />
+    <br/>
+    <input type="text" name="confirm_password" />
+    <br/>
+    <input type="text" name="company" />
+    <br/>
+    <input type="text" name="telephone" />
+    <br/>
+    <input type="submit" />
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
+
+<script>
+    
+    
+    $(document).ready(function () {
+
+    $("#SignUp").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                password: true
+            },
+            confirm_password: {
+                required: true,
+                password: true,
+                notEqual: "#password"
+            },
+            company: {
+                nls: true,
+                required: true
+            },
+            telephone: {
+                phone: true
+            }
+        }
+    });
+
+    $.validator.addMethod("email", function (value, element) {
+        return this.optional(element) || /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/i.test(value);
+    }, "Please enter a valid email address");
+
+    $.validator.addMethod("password", function (value, element) {
+        return this.optional(element) || /^[A-Za-z0-9!@#$%^&*()_]{6,16}$/i.test(value);
+    }, "Passwords are 6-16 characters");
+
+    jQuery.validator.addMethod("notEqual", function (value, element, param) {
+        return this.optional(element) || value == param;
+    }, "Passwords Do Not Match");
+
+    $.validator.addMethod("nls", function (value, element) {
+        return this.optional(element) || /^[a-zA-Z0-9\s.\-_']+$/i.test(value);
+    }, "Please Only Enter Alpha Numeric Characters");
+
+    $.validator.addMethod("phone", function (value, element) {
+        return this.optional(element) || /(\s*\(?0\d{4}\)?\s*\d{6}\s*)|(\s*\(?0\d{3}\)?\s*\d{3}\s*\d{4}\s*)/i.test(value);
+    }, "Please Only Enter UK Telephone Numbers");
+
+});
+</script>
+
+<iframe id="ytplayer" type="text/html" width="640" height="360"
+  src="https://www.youtube.com/embed?listType=playlist&list=PLlVvt226TQ8gjcp3jypWDINt49S4jY_DQ"
+  frameborder="0"></iframe>
+
+  <div id="ytplayer"></div>
+
+<script>
+  // Load the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Replace the 'ytplayer' element with an <iframe> and
+  // YouTube player after the API code downloads.
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('ytplayer', {
+      height: '360',
+      width: '640',
+      videoId: 'M7lc1UVf-VE'
+    });
+  }
+</script>
